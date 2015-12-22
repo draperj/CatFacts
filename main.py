@@ -1,5 +1,6 @@
 import smtplib, random, string
 from config import *
+
 def random_word(length):
    return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for i in range(length))
 
