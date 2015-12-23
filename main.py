@@ -16,14 +16,14 @@ log=""
 numbers = [line.rstrip('\n') for line in open('numbers.txt')]
 facts = [line.rstrip('\n') for line in open('facts.txt', encoding='utf8')]
 for number in numbers:
-    sms_text=number + "\n" + random.choice(facts) + "\n<To cancel Daily Cat Facts, reply 'Cancel " + random_word(20) + "'>"
+    sms_text="Thanks for signing up for Cats Facts! You will receive fun daily facts about CATS! >0<\n" + random.choice(facts) + "\n<To cancel Daily Cat Facts, reply 'Cancel " + random_word(20) + "'>"
     log = number + " sent on " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n"
     server = smtplib.SMTP( "smtp.gmail.com", 587 )
     server.starttls()
     server.login( gmail_username, gmail_password)
-    server.sendmail( gmail_username, number, sms_text)
+    server.sendmail( gmail_username, number, sms_text.encode('utf-8').strip())
     server.quit()
-    f = open('log_file.txt', 'w')
+    f = open('log_file.txt', 'a')
     f.write(log)
     f.close()
     print("Ran script on " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
